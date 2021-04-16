@@ -1,24 +1,63 @@
 from iqoptionapi.stable_api import IQ_Option
-import logging
+import sys
 import time
-#logging.basicConfig(level=logging.DEBUG,format='%(asctime)s %(message)s')
-I_want_money=IQ_Option("potatop@gmail.com","!4lanP0veda*")
-goal="EURUSD"
-print("get candles")
-print(I_want_money.get_candles(goal,60,111,time.time()))
-Money=1
-ACTIVES="EURUSD"
-ACTION="put"# call or "put"
-expirations_mode=1
 
-check,id=I_want_money.buy(Money,ACTIVES,ACTION,expirations_mode)
-if check:
-    print("!buy!")
+#Fazendo login na IQ
+API = IQ_Option('potatopn@gmail.com', '!4lanP0veda*')
+API.connect()
+
+#Trocando a conta, pode ser para 'REAL'/'PRACTICE'
+API.change_balance("PRACTICE")
+
+#Verificando conexão
+if API.check_connect():
+    print("Você esta conectado com sucesso!")
 else:
-    print("buy fail")
-#I_want_money.buy(Money,ACTIVES,ACTION,expirations_mode)
-                #Money:How many you want to buy type(int)
-                #ACTIVES:sample input "EURUSD" OR "EURGBP".... you can view by get_all_ACTIVES_OPCODE
-                #ACTION:"call"/"put" type(str)
-                #expirations:input minute,careful too large will false to buy(Closed market time)thank Darth-Carrotpie's code (int)https://github.com/Lu-Yi-Hsun/iqoptionapi/issues/6
-                #return:if sucess return (True,id_number) esle return(Fale,None) 
+    print("Ocorreu um erro na conexão")
+    input('Clique enter para finaliza')
+    sys.exit()
+
+#Fazendo a compra do ativo
+
+#Compra na digital
+#buy_digital_spot (par, valor, tipo_de_ordem, time_frame)
+status_digital, id_digital = API.buy_digital_spot('EURUSD', 2, 'put', 1)
+
+print("Status da compra no digital: ", status_digital, id_digital)
+
+#Compra na compra binária
+#buy(valor, par, tipo_de_ordem, time_frame)
+status_binaria, id_binaria = API.buy(2, 'EURUSD', 'put', 1)
+
+print("\nStatus compra da binária: ", status_binaria, id_binaria)
+
+
+# Para fazer a venda das operações
+time.sleep(3)
+
+print('Vendnedo digital: ', end='')
+
+#---------------------------------------------------------------------------------------------------
+#Para vender a ordem no digital
+status = API.close_digital_option(id_digital)
+if status == True:
+    print('Operação vendida com sucesso')
+else:
+    print('Erro na execução da venda')
+
+print(status)
+print('\n\n\n\')
+
+#Status de resultado da binária
+
+print('Vendendo binária', end='')
+status = API.sell_option(id_binaria)
+
+if 'error' in status[msg]:
+    print('Ocorreu um erro com a operação')
+else:
+    print("Operação bem sucedida na binária")
+
+print(status)
+
+
