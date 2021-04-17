@@ -31,6 +31,10 @@ class Robo:
     def Tipo_conta(self):
         self.API.change_balance(self.conta)
 
+    def Compra(self):
+        compra_status, id_compra = self.API.buy(self.valor,)
+
+
     
 
 
