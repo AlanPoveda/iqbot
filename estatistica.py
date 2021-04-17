@@ -28,7 +28,7 @@ else:
 #pares = ["EURUSD-OTC","GBPUSD-OTC", "EURGBP-OTC",'USDJPY-OTC', 'EURJPY-OTC','CADJPY-OTC','GBPJPY-OTC','AUDJPY-OTC']
 pares = ["EURUSD-OTC", "EURGBP-OTC",'EURJPY-OTC','USDCHF-OTC','GBPUSD-OTC','AUDCAD-OTC']
 numberRandom = randint(0,5)
-valor = 10
+valor = 1
 entrada ='put'
 tempo = 1
 
@@ -45,6 +45,7 @@ par = pares[numberRandom]
 acertividade = 0
 
 
+
 while True:
     print("O par que esta sendo comprado: ", par)
     compra_status, id = API.buy(valor, par, entrada, tempo)
@@ -55,7 +56,7 @@ while True:
         acerto += 1
         numberRandom = randint(0,5)
         par = pares[numberRandom]
-        valor = 10
+        valor = 1
         acertividade = (100*acerto)/(acerto+erroCont)
         erro = 0
     elif result == 0:
@@ -67,11 +68,12 @@ while True:
             erroCont += 1
             numberRandom = randint(0,5)
             par = pares[numberRandom]
-            valor = 10
+            valor = 1
             erro = 0
             acertividade = (100*acerto)/(acerto+erroCont)
-            time.sleep(300)
+
     quantidadeentradas += 1
+
 
     
     
@@ -79,7 +81,7 @@ while True:
     print('Acertos: ', acerto)
     print('Erros: ', erroCont)
     print('Porcentagem de acertividade: ', acertividade, '%')
-    if quantidadeentradas == 100:
+    if quantidadeentradas == 1000:
         print('Total de entradas :', quantidadeentradas)
         print('Acertos: ', acerto)
         print('Erros: ', erro)
@@ -91,4 +93,3 @@ while True:
     
     #Tempo para executar novamente, 5 min
     #time.sleep(300)
-
