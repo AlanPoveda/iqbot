@@ -23,11 +23,12 @@ else:
 
 # Fazendo a compra
 
+investimento = 10
 
 #pares = ["EURUSD-OTC","GBPUSD-OTC", "EURGBP-OTC",'USDJPY-OTC', 'EURJPY-OTC','CADJPY-OTC','GBPJPY-OTC','AUDJPY-OTC']
 pares = ["EURUSD", "EURGBP", 'EURJPY', 'USDCHF', 'GBPUSD', 'AUDCAD']
 numberRandom = randint(0, 5)
-valor = 10
+valor = investimento
 entrada = 'put'
 tempo = 1
 
@@ -71,7 +72,7 @@ while True:
         numberRandom = randint(0, 5)
         par = pares[numberRandom]
 
-        valor = 10
+        valor = investimento
         acertividade = (100*acerto)/(acerto+erroCont)
         erro = 0
     elif result == 0:
@@ -84,7 +85,7 @@ while True:
             numberRandom = randint(0, 5)
             par = pares[numberRandom]
 
-            valor = 10
+            valor = investimento
             erro = 0
             acertividade = (100*acerto)/(acerto+erroCont)
 

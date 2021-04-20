@@ -23,17 +23,19 @@ else:
 
 #Fazendo a compra
 
-
+investimento = 10
 
 pares = ["EURUSD","GBPUSD", "EURGBP",'USDJPY', 'EURJPY','CADJPY','GBPJPY','AUDJPY']
 #pares = ["EURUSD", "EURGBP",'EURJPY','USDCHF','GBPUSD']
 numberRandom = randint(0,7)
-valor = 10
+valor = investimento
 entrada ='put'
 tempo = 1
 
+
+
 banca = API.get_balance()
-metaPorcentagem = 20
+metaPorcentagem = 2
 meta = banca*(100/metaPorcentagem)
 
 
@@ -80,7 +82,7 @@ while True:
             numberRandom = randint(0,7)
             par = pares[numberRandom]
             
-            valor = 10
+            valor = investimento
             erro = 0
             acertividade = (100*acerto)/(acerto+erroCont)
     else:
@@ -88,7 +90,7 @@ while True:
         numberRandom = randint(0,7)
         par = pares[numberRandom]
 
-        valor = 10
+        valor = investimento
         acertividade = (100*acerto)/(acerto+erroCont)
         erro = 0
 
