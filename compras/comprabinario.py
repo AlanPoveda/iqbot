@@ -1,5 +1,5 @@
 from random import *
-from iqopti.;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;                                                                                                                                                                                                                                                                                                           onapi.stable_api import IQ_Option
+from iqoptionapi.stable_api import IQ_Option
 import sys
 import time
 
@@ -27,9 +27,13 @@ else:
 #pares = ["EURUSD-OTC","GBPUSD-OTC", "EURGBP-OTC",'USDJPY-OTC', 'EURJPY-OTC','CADJPY-OTC','GBPJPY-OTC','AUDJPY-OTC']
 pares = ["EURUSD", "EURGBP", 'EURJPY', 'USDCHF', 'GBPUSD', 'AUDCAD']
 numberRandom = randint(0, 5)
-valor = 2
+valor = 10
 entrada = 'put'
 tempo = 1
+
+banca = API.get_balance()
+metaPorcentagem = 20
+meta = banca*(100/metaPorcentagem)
 
 
 quantidadeentradas = 0
@@ -42,9 +46,11 @@ par = pares[numberRandom]
 
 acertividade = 0
 
-#compra_status, id_compra = API.buy_digital_spot(pares, valor, entrada, tempo )
+
 
 while True:
+    #Informação da banca
+    banca = API.get_balance()
     print("O par que esta sendo comprado: ", par)
 
     # Compra
@@ -65,7 +71,7 @@ while True:
         numberRandom = randint(0, 5)
         par = pares[numberRandom]
 
-        valor = 2
+        valor = 10
         acertividade = (100*acerto)/(acerto+erroCont)
         erro = 0
     elif result == 0:
@@ -73,12 +79,12 @@ while True:
     elif result < 0:
         valor = (valor * 1.05)*2
         erro += 1
-        if erro > 3:
+        if erro > 4:
             erroCont += 1
             numberRandom = randint(0, 5)
             par = pares[numberRandom]
 
-            valor = 2
+            valor = 10
             erro = 0
             acertividade = (100*acerto)/(acerto+erroCont)
 
@@ -88,12 +94,10 @@ while True:
     print('Acertos: ', acerto)
     print('Erros: ', erroCont)
     print('Porcentagem de acertividade: ', acertividade, '%')
-    if quantidadeentradas == 1000:
-        print('Total de entradas :', quantidadeentradas)
-        print('Acertos: ', acerto)
-        print('Erros: ', erro)
-        print('Empate: ', doji)
-        print('Porcentagem de acertividade: ', acertividade, '%')
+    if banca >= meta:
+        print("Alcançou a meta")
+        
+        sys.exit()
         break
 
    

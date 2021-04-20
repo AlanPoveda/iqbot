@@ -28,9 +28,13 @@ else:
 pares = ["EURUSD","GBPUSD", "EURGBP",'USDJPY', 'EURJPY','CADJPY','GBPJPY','AUDJPY']
 #pares = ["EURUSD", "EURGBP",'EURJPY','USDCHF','GBPUSD']
 numberRandom = randint(0,7)
-valor = 2
+valor = 10
 entrada ='put'
 tempo = 1
+
+banca = API.get_balance()
+metaPorcentagem = 20
+meta = banca*(100/metaPorcentagem)
 
 
 quantidadeentradas = 0 
@@ -76,7 +80,7 @@ while True:
             numberRandom = randint(0,7)
             par = pares[numberRandom]
             
-            valor = 2
+            valor = 10
             erro = 0
             acertividade = (100*acerto)/(acerto+erroCont)
     else:
@@ -84,7 +88,7 @@ while True:
         numberRandom = randint(0,7)
         par = pares[numberRandom]
 
-        valor = 2
+        valor = 10
         acertividade = (100*acerto)/(acerto+erroCont)
         erro = 0
 
@@ -98,15 +102,9 @@ while True:
     print('Acertos: ', acerto)
     print('Erros: ', erroCont)
     print('Porcentagem de acertividade: ', acertividade, '%')
-    if quantidadeentradas == 1000:
-        print('Total de entradas :', quantidadeentradas)
-        print('Acertos: ', acerto)
-        print('Erros: ', erro)
-        print('Empate: ', doji)
-        print('Porcentagem de acertividade: ', acertividade, '%')
+    if banca >= meta:
         break
     
     
     
-    #Tempo para executar novamente, 5 min
-    #time.sleep(300)
+    
