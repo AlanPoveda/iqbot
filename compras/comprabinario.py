@@ -23,7 +23,7 @@ else:
 
 # Fazendo a compra
 
-investimento = 10
+investimento = 4.50
 
 #pares = ["EURUSD-OTC","GBPUSD-OTC", "EURGBP-OTC",'USDJPY-OTC', 'EURJPY-OTC','CADJPY-OTC','GBPJPY-OTC','AUDJPY-OTC']
 pares = ["EURUSD", "EURGBP", 'EURJPY', 'USDCHF', 'GBPUSD', 'AUDCAD']
@@ -36,6 +36,7 @@ banca = API.get_balance()
 metaPorcentagem = 20
 meta = banca*(100/metaPorcentagem)
 
+gale = 2
 
 quantidadeentradas = 0
 acerto = 0
@@ -46,6 +47,7 @@ doji = 0
 par = pares[numberRandom]
 
 acertividade = 0
+
 
 
 
@@ -78,9 +80,9 @@ while True:
     elif result == 0:
         doji += 0
     elif result < 0:
-        valor = (valor * 1.05)*2
+        valor = (valor * 1.15)*2
         erro += 1
-        if erro > 4:
+        if erro > gale:
             erroCont += 1
             numberRandom = randint(0, 5)
             par = pares[numberRandom]
