@@ -34,7 +34,7 @@ entrada = 'put'
 tempo = 1
 
 banca = API.get_balance()
-metaPorcentagem = 2
+metaPorcentagem = 20
 meta = banca*((100/metaPorcentagem)+1)
 
 
@@ -52,7 +52,7 @@ acertividade = 0
 
 
 
-while banca <= meta:            
+while banca < meta:            
     #Informação da banca
     
     print("O par que esta sendo comprado: ", par)
