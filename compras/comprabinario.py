@@ -23,7 +23,8 @@ else:
 
 # Fazendo a compra
 
-investimento = 4.50
+investimento = 70
+gale = 2
 
 #pares = ["EURUSD-OTC","GBPUSD-OTC", "EURGBP-OTC",'USDJPY-OTC', 'EURJPY-OTC','CADJPY-OTC','GBPJPY-OTC','AUDJPY-OTC']
 pares = ["EURUSD", "EURGBP", 'EURJPY', 'USDCHF', 'GBPUSD', 'AUDCAD']
@@ -33,10 +34,10 @@ entrada = 'put'
 tempo = 1
 
 banca = API.get_balance()
-metaPorcentagem = 20
-meta = banca*(100/metaPorcentagem)
+metaPorcentagem = 2
+meta = banca*((100/metaPorcentagem)+1)
 
-gale = 2
+
 
 quantidadeentradas = 0
 acerto = 0
@@ -51,22 +52,25 @@ acertividade = 0
 
 
 
-while True:
+while banca <= meta:            
     #Informação da banca
-    banca = API.get_balance()
+    
     print("O par que esta sendo comprado: ", par)
 
     # Compra
     compra_status, id = API.buy(valor, par, entrada, tempo)
 
     print("Status da compra: ", compra_status, id)
-    print("Aguardando resultado...")
+    
     while compra_status == False:
         numberRandom = randint(0, 5)
         par = pares[numberRandom]
         compra_status, id = API.buy_digital_spot(par, valor, entrada, tempo)
         if compra_status == True:
+            print("O par que esta sendo comprado: ", par)
+            print("Status da compra: ", compra_status, id)
             break
+    print("Aguardando resultado...")
     result = API.check_win_v3(id)
 
     if result > 0:
@@ -96,11 +100,7 @@ while True:
     print('Total de entradas :', quantidadeentradas)
     print('Acertos: ', acerto)
     print('Erros: ', erroCont)
-    print('Porcentagem de acertividade: ', acertividade, '%')
-    if banca >= meta:
-        print("Alcançou a meta")
-        
-        sys.exit()
-        break
+    print('Porcentagem de acertividade: ', acertividade, '%')    
+    
 
    
