@@ -8,6 +8,8 @@ password = '!4lanP0veda*'
 
 
 class Robo:
+
+    # recebe login e senha para logar API
     def __init__(self, login, senha):
         self.API = IQ_Option(login, senha)
         self.conta = 'PRACTICE'
@@ -21,6 +23,7 @@ class Robo:
 
         }
     
+    # recebe a conexão, retorna mensagem se conecta ou não
     def Conexao(self):
         self.API.connect()
         if self.API.check_connect():
@@ -28,11 +31,13 @@ class Robo:
         else:
             return "Ocorreu um erro na conexão"
 
+    # retorna o balanço da conta
     def Tipo_conta(self):
-        self.API.change_balance(self.conta)
+        return self.API.change_balance(self.conta)
 
+    # Retorna status da compra e id da compra
     def Compra(self):
-        compra_status, id_compra = self.API.buy(self.valor,)
+        return compra_status, id_compra = self.API.buy(self.valor,)
 
 
     
