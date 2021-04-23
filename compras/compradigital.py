@@ -10,7 +10,7 @@ API.connect()
 
 #Troca de conta
 
-API.change_balance('PRACTICE')
+API.change_balance('REAL')
 
 #Verificação de conexão
 
@@ -23,7 +23,8 @@ else:
 
 #Fazendo a compra
 
-investimento = 10
+investimento = 4.50
+gale = 4
 
 pares = ["EURUSD","GBPUSD", "EURGBP",'USDJPY', 'EURJPY','CADJPY','GBPJPY','AUDJPY']
 #pares = ["EURUSD", "EURGBP",'EURJPY','USDCHF','GBPUSD']
@@ -55,7 +56,7 @@ while True:
     print("O par que esta sendo comprado: ", par)
 
     #Compra
-    #compra_status, id = API.buy(valor, par, entrada, tempo)
+    
     compra_status, id = API.buy_digital_spot(par, valor, entrada, tempo )
     
     print("Status da compra: ", compra_status, id)
@@ -77,7 +78,7 @@ while True:
     if win<0:
         valor = (valor * 1.05)*2
         erro += 1
-        if erro > 4:
+        if erro > gale:
             erroCont += 1
             numberRandom = randint(0,7)
             par = pares[numberRandom]
