@@ -8,3 +8,4 @@ def ola():
 
 
 
+app.run()
