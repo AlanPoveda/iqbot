@@ -40,6 +40,8 @@ class Robo:
     # Retorna status da compra e id da compra
     def compra(self):
         compra_status, id_compra = self.API.buy(self.valor,)
+        while compra_status == False:
+            
         resultado(id_compra)
         return compra_status, id_compra
 
