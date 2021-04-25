@@ -24,20 +24,33 @@ class Robo:
         }
     
     # recebe a conexão, retorna mensagem se conecta ou não
-    def Conexao(self):
+    def conexao(self):
         self.API.connect()
         if self.API.check_connect():
-            return "Você está conectado :D"
+            print("Você está conectado :D")
+            tipo_conta() 
         else:
             return "Ocorreu um erro na conexão"
 
     # retorna o balanço da conta
-    def Tipo_conta(self):
-        return self.API.change_balance(self.conta)
+    def tipo_conta(self):
+        self.API.change_balance(self.conta)
+        compra()
 
     # Retorna status da compra e id da compra
-    def Compra(self):
-        return compra_status, id_compra = self.API.buy(self.valor,)
+    def compra(self):
+        compra_status, id_compra = self.API.buy(self.valor,)
+        resultado(id_compra)
+        return compra_status, id_compra
+
+
+    # Retorna o resultado da compra
+    def resultado(self, id):
+        result = self.API.check_win_v3(id)
+        return result
+
+    
+
 
 
     
