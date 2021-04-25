@@ -23,11 +23,11 @@ else:
 
 # Fazendo a compra
 
-investimento = 70
+investimento = 4.50
 gale = 2
 
 #pares = ["EURUSD-OTC","GBPUSD-OTC", "EURGBP-OTC",'USDJPY-OTC', 'EURJPY-OTC','CADJPY-OTC','GBPJPY-OTC','AUDJPY-OTC']
-pares = ["EURUSD", "EURGBP", 'EURJPY', 'USDCHF', 'GBPUSD', 'AUDCAD']
+pares = ["EURUSD-OTC", "EURGBP-OTC", 'EURJPY-OTC', 'USDCHF-OTC', 'GBPUSD-OTC', 'AUDCAD-OTC']
 numberRandom = randint(0, 5)
 valor = investimento
 entrada = 'put'

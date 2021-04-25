@@ -10,7 +10,7 @@ API.connect()
 
 #Troca de conta
 
-API.change_balance('REAL')
+API.change_balance('PRACTICE')
 
 #Verificação de conexão
 
