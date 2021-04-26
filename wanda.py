@@ -5,7 +5,7 @@ app = Flask('__name__')
 
 # Decorator para fazer a primeira rota. Decorator são funções já criadas para serem acopladas
 
-
+# Função faz a parte lógica, e retorna um json com a lista completa
 @app.route('/api')
 def makeList():
     listaFinal = []
@@ -23,21 +23,21 @@ def makeList():
     final = jsonify({"lista": listaFinal})
     return final
 
-
+# A função retorna o valor da moeda que será negociado
 def randomPar():
     paresPrincipais = ['EUR/USD', 'GBP/USD', 'EUR/GBP',
                        'USD/JPY', 'EUR/JPY', 'CAD/JPY', 'GBP/JPY', 'AUD/JPY']
     numberRandom = randint(0, 7)
     return paresPrincipais[numberRandom]
 
-
+# A função recebe horas, e retorna a hora no formato correto
 def hoursFormat(hor):
     if hor < 10:
         return (f"0{hor}")
     else:
         return hor
 
-
+# A função recebe os minutos e retorna os minutos no formato correto
 def minutesFormat(minu):
     if minu < 10:
         return (f"0{minu}")
