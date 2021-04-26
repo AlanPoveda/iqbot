@@ -7,6 +7,12 @@ app = Flask('__name__')
 
 # Função faz a parte lógica, e retorna um json com a lista completa
 @app.route('/api')
+def api():
+    lista = jsonify({"lista": makeList()})
+    return lista
+    
+
+
 def makeList():
     listaFinal = []
     cont = 0
@@ -20,8 +26,8 @@ def makeList():
             horas += 1
             minutos = 0
         cont += 1
-    final = jsonify({"lista": listaFinal})
-    return final
+    
+    return listaFinal
 
 # A função retorna o valor da moeda que será negociado
 def randomPar():
