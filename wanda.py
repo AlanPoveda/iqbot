@@ -1,15 +1,16 @@
 from random import *
-from flask import Flask, jsonify
+from flask import Flask, request, jsonify
 
 app = Flask('__name__')
 
 # Decorator para fazer a primeira rota. Decorator são funções já criadas para serem acopladas
 
 # Função faz a parte lógica, e retorna um json com a lista completa
-@app.route('/api')
+@app.route('/api', methods=['GET'])
 def api():
-    lista = jsonify({"lista": makeList()})
-    return lista
+    if request.method == 'GET':
+        lista = jsonify({"lista": makeList()})
+        return lista
     
 
 
