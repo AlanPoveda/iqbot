@@ -23,15 +23,15 @@ else:
 
 # Fazendo a compra
 
-investimento = 4.50
-gale = 2
+investimento = 5
+gale = 4
 
 #pares = ["EURUSD-OTC","GBPUSD-OTC", "EURGBP-OTC",'USDJPY-OTC', 'EURJPY-OTC','CADJPY-OTC','GBPJPY-OTC','AUDJPY-OTC']
-pares = ["EURUSD-OTC", "EURGBP-OTC", 'EURJPY-OTC', 'USDCHF-OTC', 'GBPUSD-OTC', 'AUDCAD-OTC']
+pares = ["EURUSD", "EURGBP", 'EURJPY', 'USDCHF', 'GBPUSD', 'AUDCAD']
 numberRandom = randint(0, 5)
 valor = investimento
 entrada = 'put'
-tempo = 1
+tempo = 5
 
 banca = API.get_balance()
 metaPorcentagem = 20
