@@ -13,8 +13,6 @@ class Robo:
     def __init__(self, login, senha):
         self.API = IQ_Option(login, senha)
         self.conta = 'PRACTICE'
-        self.valor = 1
-        self.entrada = "put"
 
         self.dados_operacao = {
             'pares' : ["EURUSD-OTC", "EURGBP-OTC",'EURJPY-OTC','USDCHF-OTC','GBPUSD-OTC','AUDCAD-OTC'],
@@ -38,8 +36,8 @@ class Robo:
         compra()
 
     # Retorna status da compra e id da compra
-    def compra(self):
-        compra_status, id_compra = self.API.buy(self.valor,)
+    def compra(self, valor, par, entrada, tempo):
+        compra_status, id_compra = self.API.buy(valor, par, entrada, tempo)
         while compra_status == False:
             
         resultado(id_compra)
