@@ -3,8 +3,8 @@ import requests
 import time
 
 # Informações do grupo, token, API
-#chat_id = -356717830 #chat Grupo
-chat_id = 378724848
+chat_id = -356717830 #chat Grupo
+#chat_id = 378724848
 token= '1731762118:AAEBEsvGvkc2JXUYVJJOO9JnmI4IfqdYBW4'
 url_base = f'https://api.telegram.org/bot{token}/'
 resposta = requests.get("http://127.0.0.1:5000/api")
