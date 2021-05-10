@@ -36,6 +36,7 @@ class Gale:
         return numberRandom
 
     # Recebe valor, entrada, tempo
+    # arrumar
     def Compra(self, valor, entrada, tempo):
         print('Make a buy...')
         initValue = valor
