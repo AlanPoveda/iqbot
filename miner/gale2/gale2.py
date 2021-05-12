@@ -12,8 +12,12 @@ entrada = 'put'
 
 class Gale:
 
-    def __init__(self, user, password):
+    def __init__(self, user, password, valor):
         self.API = IQ_Option(user, password)
+        self.id_compra = ''
+        self.loss = 0
+        self.win = 0
+        self.value = valor
         self.account = 'PRACTICE'
         self.pares = ['EURUSD', 'EURGBP',
                       'EURJPY', 'USDCHF', 'GBPUSD', 'AUDCAD']
@@ -37,43 +41,52 @@ class Gale:
 
     # Recebe valor, entrada, tempo
     # arrumar
-    def Compra(self, valor, entrada, tempo):
+    def Compra(self, entrada, tempo):
         print('Make a buy...')
-        initValue = valor
-        loss = 0
-        win = 0
+        initValue = self.value
         num = self.RandomNumber()
         par = self.pares[num]
-        compra_status, id_compra = self.API.buy(valor, par, entrada, tempo)
+        compra_status, self.id_compra = self.API.buy(self.value, par, entrada, tempo)
         if compra_status == False:
             print('Buy Again')
-            self.Compra(valor, entrada, tempo)
+            self.Compra(entrada, tempo)
         else:
             print('waiting for the result of the order...')
-            result = self.API.check_win_v3(id_compra)
-            while result < 0:
-                loss += 1
-                valor = self.Gale(valor)
-                self.API.buy(valor, par, entrada, tempo)
-                if loss > 3:
-                    return 'Loss'
-                    break
-            win += 1
-            valor = initValue
-            loss = 0
-            num = self.RandomNumber()
-            if win == 2:
-                return 'Meta batida'
-            self.Compra(valor, entrada, tempo)
+            result = self.resultVerification()
+            if result > 0:
+                self.win += 1
+                self.loss = 0
+                self.value = initValue
+                if self.win ==2:
+                    return print('Meta batida')
+                self.Compra(entrada, tempo)
+            elif result < 0:
+                self.loss += 1
+                if self.loss == 3:
+                    return print('Hit')
+                self.value = self.Gale(initValue)
+                self.Compra(entrada, tempo)
+                self.value = initValue
+
+
+
+
+                
+                
+
+    # Verificar resultado
+    def resultVerification(self):
+        return self.API.check_win_v3(self.id_compra)
 
     # Recebe o valor anterior e retorna com o novo valor
     def Gale(self, newValue):
         newValue = (newValue*1.15)*2
+
         return newValue
 
         
 
 
-Alan = Gale(username, password)
+Alan = Gale(username, password, valor)
 Alan.Connection()
-print(Alan.Compra(valor, entrada, tempo))
+Alan.Compra(entrada, tempo)
