@@ -12,7 +12,19 @@ lista = resposta.json()
 
 def mensagem():
     # Formatação da lista que esta sendo gerada
-    formatacao = ''
+    formatacao = '''💎 SINAIS VIP 💎
+
+TODOS OS SINAIS SÃO PARA PUT 🔻 
+TEMPO DA VELA M5 ⏱
+TEMPO DE OPERAÇÃO 5M ⏱ 
+LISTA DE ATÉ 2 GALE 📈
+
+⚜OPERACIONAL DA WANDA⚜
+ 
+SEGUNDA A SEXTA 
+00H ATE AS 14H45⏱
+
+'''
     for itens in lista['lista']:
         formatacao += f"{itens} PUT 🔻 \n"
 
