@@ -54,23 +54,22 @@ class Gale:
             print('waiting for the result of the order...')
             result = self.resultVerification()
             if result > 0:
-                self.win += 1
-                self.loss = 0
-                self.value = initValue
-                if self.win ==2:
-                    return print('Meta batida')
-                self.Compra(entrada, tempo)
+                self.win()
             elif result < 0:
-                self.loss += 1
-                if self.loss == 3:
-                    return print('Hit')
-                self.value = self.Gale(initValue)
-                self.Compra(entrada, tempo)
-                self.value = initValue
+                self.self.Compra(entrada, tempo)
+            else:
+                self.Gale(self.value)
+                
 
 
 
-
+    def win(self):
+        self.win += 1
+        self.loss = 0
+        self.value = initValue
+        if self.win ==2:
+            return print('Meta batida')
+        self.Compra(entrada, tempo)
                 
                 
 
@@ -81,8 +80,12 @@ class Gale:
     # Recebe o valor anterior e retorna com o novo valor
     def Gale(self, newValue):
         newValue = (newValue*1.15)*2
-
-        return newValue
+        self.loss += 1
+        if self.loss == 3:
+            return print('Hit')
+        self.value = newValue
+        self.Compra(entrada, tempo)
+        self.value = initValue
 
         
 
