@@ -18,6 +18,7 @@ class Gale:
         self.loss = 0
         self.win = 0
         self.value = valor
+        self.initValue = valor
         self.account = 'PRACTICE'
         self.pares = ['EURUSD', 'EURGBP',
                       'EURJPY', 'USDCHF', 'GBPUSD', 'AUDCAD']
@@ -26,9 +27,9 @@ class Gale:
     def Connection(self):
         self.API.connect()
         if self.API.connect():
-            return 'Successfully connected :D'
+            return print('Successfully connected :D')
         else:
-            return 'Conection Error D:'
+            return print('Conection Error D:')
 
     # Retorna tipo de conta, se é real ou de pratica
     def Account(self):
@@ -43,7 +44,6 @@ class Gale:
     # arrumar
     def Compra(self, entrada, tempo):
         print('Make a buy...')
-        initValue = self.value
         num = self.RandomNumber()
         par = self.pares[num]
         compra_status, self.id_compra = self.API.buy(self.value, par, entrada, tempo)
@@ -54,38 +54,33 @@ class Gale:
             print('waiting for the result of the order...')
             result = self.resultVerification()
             if result > 0:
-                self.win()
-            elif result < 0:
-                self.self.Compra(entrada, tempo)
+                self.winResult()
             else:
-                self.Gale(self.value)
-                
-
-
-
-    def win(self):
+                self.Gale()
+            
+    # Correto
+    def winResult(self):
         self.win += 1
-        self.loss = 0
-        self.value = initValue
-        if self.win ==2:
-            return print('Meta batida')
-        self.Compra(entrada, tempo)
+        self.loss += 0
+        self.value = self.initValue
+        if self.win == 2:
+            return print("Meta batida")
+        self.Compra(entrada,tempo)
+        
                 
-                
-
-    # Verificar resultado
+     # Verificar resultado
     def resultVerification(self):
         return self.API.check_win_v3(self.id_compra)
 
     # Recebe o valor anterior e retorna com o novo valor
-    def Gale(self, newValue):
+    def Gale(self):
         newValue = (newValue*1.15)*2
         self.loss += 1
         if self.loss == 3:
             return print('Hit')
         self.value = newValue
-        self.Compra(entrada, tempo)
-        self.value = initValue
+        self.Compra(entrada,tempo)
+        
 
         
 
