@@ -70,7 +70,7 @@ class Gale:
         self.par = self.pares[self.RandomNumber()]
         self.Compra()
 
-    # Faz o gale e ainda entra novamente até acertar ou falhar
+    # Retorna se deu loss ou hit
     def lossResult(self):
         self.loss += 1
         if self.loss == 3:
