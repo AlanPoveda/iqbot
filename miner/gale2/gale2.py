@@ -7,21 +7,21 @@ username = 'potatopn@gmail.com'
 password = '!4lanP0veda*'
 valor = 2
 tempo = 1
-entrada = 'put'
 
 
 class Gale:
 
-    def __init__(self, user, password, valor):
+    def __init__(self, user, password, valor, tempo):
         self.API = IQ_Option(user, password)
         self.id_compra = ''
         self.loss = 0
         self.win = 0
         self.value = valor
-        self.initValue = valor
+        self.entrada = 'put'
+        self.time = tempo
         self.account = 'PRACTICE'
-        self.pares = ['EURUSD', 'EURGBP',
-                      'EURJPY', 'USDCHF', 'GBPUSD', 'AUDCAD']
+        self.pares = ['EURUSD-OTC','AUDCAD-OTC', 'NZDUSD-OTC','USDCHF-OTC','GBPUSD-OTC','EURJPY-OTC']
+        self.par = self.pares[self.RandomNumber()]
 
     # Conectando na conta. Retorna se foi feito com sucesso ou não
     def Connection(self):
@@ -41,50 +41,69 @@ class Gale:
         return numberRandom
 
     # Recebe valor, entrada, tempo
-    # arrumar
-    def Compra(self, entrada, tempo):
+    def Compra(self):
         print('Make a buy...')
-        num = self.RandomNumber()
-        par = self.pares[num]
-        compra_status, self.id_compra = self.API.buy(self.value, par, entrada, tempo)
+        compra_status, self.id_compra = self.API.buy(self.value, self.par, self.entrada, self.time)
         if compra_status == False:
             print('Buy Again')
-            self.Compra(entrada, tempo)
+            self.par = self.pares[self.RandomNumber()]
+            self.Compra()
         else:
             print('waiting for the result of the order...')
-            result = self.resultVerification()
+            result = self.resultVerification(self.id_compra)
             if result > 0:
                 self.winResult()
+            elif result == 0:
+                self.Compra()
             else:
-                self.Gale()
+                self.lossResult()
             
-    # Correto
+    # Retorna se bateu a meta ou não
     def winResult(self):
         self.win += 1
-        self.loss += 0
-        self.value = self.initValue
-        if self.win == 2:
-            return print("Meta batida")
-        self.Compra(entrada,tempo)
+        self.loss = 0
+        if self.win == 10:
+            return print("Meta batida ;D")
+        self.par = self.pares[self.RandomNumber()]
+        self.Compra()
+
+    # Faz o gale e ainda entra novamente até acertar ou falhar    
+    def lossResult(self):
+        self.loss += 1
+        if self.loss == 2:
+            return print("Hit :/")
+        else:
+            newValue = self.galeValue()
+            compra_status, self.id_compra = self.API.buy(newValue, self.par, self.entrada, self.time)
+            newResult = self.resultVerification(self.id_compra)
+            if newResult < 0:
+                self.lossResult()
+            elif newResult == 0:
+                self.API.buy(newValue, self.par, self.entrada, self.time)
+            else:
+                newValue = self.value
+                self.winResult()
+
+    # Retorna o novo valor, fazendo o Maringale
+    def galeValue(self):
+        newValue = self.value
+        newValue = (newValue*1.15)*2
+        return newValue
+
         
-                
-     # Verificar resultado
-    def resultVerification(self):
+
+     # Verificar e retorna o valor do resultado da operação
+    def resultVerification(self, id):
         return self.API.check_win_v3(self.id_compra)
 
-    # Recebe o valor anterior e retorna com o novo valor
-    def Gale(self):
-        newValue = (newValue*1.15)*2
-        self.loss += 1
-        if self.loss == 3:
-            return print('Hit')
-        self.value = newValue
-        self.Compra(entrada,tempo)
+    
+    
+        
         
 
         
 
 
-Alan = Gale(username, password, valor)
+Alan = Gale(username, password, valor, tempo)
 Alan.Connection()
-Alan.Compra(entrada, tempo)
+Alan.Compra()
