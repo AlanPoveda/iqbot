@@ -14,15 +14,15 @@ def mensagem():
     # Formatação da lista que esta sendo gerada
     formatacao = '''💎 SINAIS VIP 💎
 
-TODOS OS SINAIS SÃO PARA PUT 🔻 
-TEMPO DA VELA M5 ⏱
-TEMPO DE OPERAÇÃO 5M ⏱ 
-LISTA DE ATÉ 2 GALE 📈
+        TODOS OS SINAIS SÃO PARA PUT 🔻 
+        TEMPO DA VELA M5 ⏱
+        TEMPO DE OPERAÇÃO 5M ⏱ 
+        LISTA DE ATÉ 2 GALE 📈
 
-⚜OPERACIONAL DA WANDA⚜
- 
-SEGUNDA A SEXTA 
-00H ATE AS 14H45⏱
+        ⚜OPERACIONAL DA WANDA⚜
+        
+        SEGUNDA A SEXTA 
+        00H ATE AS 14H45⏱
 
 '''
     for itens in lista['lista']:
@@ -35,18 +35,6 @@ SEGUNDA A SEXTA
 
 print(mensagem())
 
-
-""" *:gem:SINAIS VIP:gem:*
-
-TODOS OS SINAIS SÃO PARA PUT :arrow_down: 
-TEMPO DA VELA M5⏱
-TEMPO DE OPERAÇÃO 5M⏱
-LISTA DE ATÉ 2 GALE:chart_with_upwards_trend:
-
-⚜OPERACIONAL DA WANDA⚜
- 
-SEGUNDA A SEXTA 
-00H ATE AS 14H45⏱"""
 
 
         
