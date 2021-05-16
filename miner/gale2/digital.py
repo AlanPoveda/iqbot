@@ -16,7 +16,6 @@ class Gale:
         self.loss = 0
         self.win = 0
         self.value = valor
-        self.gale = valor
         self.entrada = 'put'
         self.time = tempo
         self.account = conta
@@ -44,8 +43,7 @@ class Gale:
     # Recebe valor, entrada, tempo
     def Compra(self):
         print('Make a buy...')
-        compra_status, self.id_compra = self.API.buy(
-            self.value, self.par, self.entrada, self.time)
+        compra_status, self.id_compra = self.API.buy_digital_spot(self.par, self.value, self.entrada, self.time)
         if compra_status == False:
             print('Buy Again')
             self.par = self.pares[self.RandomNumber()]
@@ -60,23 +58,22 @@ class Gale:
             else:
                 self.lossResult()
 
-    # Retorna se bateu a meta
+    # Retorna se bateu a meta ou não
     def winResult(self):
         self.win += 1
-        self.gale = self.value
         self.loss = 0
-        if self.win == 2:
+        if self.win == 10:
             return print("Meta batida ;D")
         self.par = self.pares[self.RandomNumber()]
         self.Compra()
 
-    # Retorna se deu loss ou hit
+    # Faz o gale e ainda entra novamente até acertar ou falhar
     def lossResult(self):
         self.loss += 1
         if self.loss == 3:
             return print("Hit :/")
         else:
-            newValue = self.galeValue(self.gale)
+            newValue = self.galeValue()
             compra_status, self.id_compra = self.API.buy(
                 newValue, self.par, self.entrada, self.time)
             newResult = self.resultVerification(self.id_compra)
@@ -89,14 +86,15 @@ class Gale:
                 self.winResult()
 
     # Retorna o novo valor, fazendo o Maringale
-    def galeValue(self, galeValue):
-        galeValue = (galeValue*1.15)*2
-        self.gale = galeValue
-        return galeValue
+    def galeValue(self):
+        newValue = self.value
+        newValue = (newValue*1.15)*2
+        return newValue
 
      # Verificar e retorna o valor do resultado da operação
 
     def resultVerification(self, id):
+        self.API.check_win_digital_v2(self.id_compra)
         return self.API.check_win_v3(self.id_compra)
 
 
