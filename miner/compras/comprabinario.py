@@ -26,12 +26,12 @@ else:
 investimento = 5
 gale = 4
 
-#pares = ["EURUSD-OTC","GBPUSD-OTC", "EURGBP-OTC",'USDJPY-OTC', 'EURJPY-OTC','CADJPY-OTC','GBPJPY-OTC','AUDJPY-OTC']
-pares = ["EURUSD", "EURGBP", 'EURJPY', 'USDCHF', 'GBPUSD', 'AUDCAD']
+pares = ["EURUSD-OTC","GBPUSD-OTC", "EURGBP-OTC",'USDJPY-OTC', 'EURJPY-OTC','CADJPY-OTC','GBPJPY-OTC','AUDJPY-OTC']
+#pares = ["EURUSD", "EURGBP", 'EURJPY', 'USDCHF', 'GBPUSD', 'AUDCAD']
 numberRandom = randint(0, 5)
 valor = investimento
 entrada = 'put'
-tempo = 5
+tempo = 1
 
 banca = API.get_balance()
 metaPorcentagem = 20
@@ -52,7 +52,7 @@ acertividade = 0
 
 
 
-while banca < meta:            
+while True:            
     #Informação da banca
     
     print("O par que esta sendo comprado: ", par)
@@ -65,7 +65,7 @@ while banca < meta:
     while compra_status == False:
         numberRandom = randint(0, 5)
         par = pares[numberRandom]
-        compra_status, id = API.buy_digital_spot(par, valor, entrada, tempo)
+        compra_status, id = API.buy(valor, par, entrada, tempo)
         if compra_status == True:
             print("O par que esta sendo comprado: ", par)
             print("Status da compra: ", compra_status, id)

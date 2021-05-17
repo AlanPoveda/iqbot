@@ -20,8 +20,8 @@ class Gale:
         self.entrada = 'put'
         self.time = tempo
         self.account = conta
-        self.pares = ['EURUSD-OTC', 'AUDCAD-OTC', 'NZDUSD-OTC',
-                      'USDCHF-OTC', 'GBPUSD-OTC', 'EURJPY-OTC']
+        self.pares = ['EURUSD', 'AUDCAD', 'NZDUSD',
+                      'USDCHF', 'GBPUSD', 'EURJPY']
         self.par = self.pares[self.RandomNumber()]
 
     # Conectando na conta. Retorna se foi feito com sucesso ou não
