@@ -4,8 +4,8 @@ from iqoptionapi.stable_api import IQ_Option
 username = 'potatopn@gmail.com'
 password = '!4lanP0veda*'
 valor = 2
-tempo = 1
-conta = 'PRACTICE'
+tempo = 5
+conta = 'REAL'
 
 
 class Gale:
@@ -20,13 +20,14 @@ class Gale:
         self.entrada = 'put'
         self.time = tempo
         self.account = conta
-        self.pares = ['EURUSD', 'AUDCAD', 'NZDUSD',
-                      'USDCHF', 'GBPUSD', 'EURJPY']
+        self.pares = ['EURUSD', 'CADJPY', 'USDJPY',
+                      'AUDUSD', 'NZDUSD', 'EURNZD', 'AUDJPY']
         self.par = self.pares[self.RandomNumber()]
 
     # Conectando na conta. Retorna se foi feito com sucesso ou não
     def Connection(self):
         self.API.connect()
+        self.Account()
         if self.API.connect():
             return print('Successfully connected :D')
         else:
@@ -66,7 +67,7 @@ class Gale:
         self.gale = self.value
         self.loss = 0
         if self.win == 2:
-            return print("Meta batida ;D")
+            return print("Goal hit ;D")
         self.par = self.pares[self.RandomNumber()]
         self.Compra()
 
@@ -90,7 +91,7 @@ class Gale:
 
     # Retorna o novo valor, fazendo o Maringale
     def galeValue(self, galeValue):
-        galeValue = (galeValue*1.15)*2
+        galeValue = (galeValue*1.13)*2
         self.gale = galeValue
         return galeValue
 
