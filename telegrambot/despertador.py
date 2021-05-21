@@ -5,19 +5,21 @@ import time
 import datetime
 
 
-while True:
-  timevalue = datetime.datetime.now()
-  now = timevalue.strftime('%H:%M:%S')
-  horas = timevalue.strftime('%H')
-  print(horas)
-  print(now)
-  if horas > '19':
-    while horas > '19':
+def Horas():
+  while True:
+    timevalue = datetime.datetime.now()
+    now = timevalue.strftime('%H:%M:%S')
+    horas = timevalue.strftime('%H')
+    print(horas)
+    print(now)
+    while horas >= '19' and now < '20:00:02':
       time.sleep(1)
       if now >= '20:00:00':
-        print(mensagem.Mensagem())
+        ExecMessage()
         break
   else:
     time.sleep(10)
 
 
+def ExecMessage():
+  return print(mensagem.Mensagem())
