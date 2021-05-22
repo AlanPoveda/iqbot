@@ -20,8 +20,7 @@ class Gale:
         self.entrada = 'put'
         self.time = tempo
         self.account = conta
-        self.pares = ['EURUSD', 'CADJPY', 'USDJPY',
-                      'AUDUSD', 'NZDUSD', 'EURNZD', 'AUDJPY']
+        self.pares = ['EURUSD-OTC', 'EURGBP-OTC', 'AUDCAD-OTC', 'EURJPY-OTC']
         self.par = self.pares[self.RandomNumber()]
 
     # Conectando na conta. Retorna se foi feito com sucesso ou não
@@ -91,7 +90,7 @@ class Gale:
 
     # Retorna o novo valor, fazendo o Maringale
     def galeValue(self, galeValue):
-        galeValue = (galeValue*1.13)*2
+        galeValue = (galeValue*1.05)*2
         self.gale = galeValue
         return galeValue
 
