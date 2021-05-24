@@ -5,7 +5,7 @@ import time
 
 #Fazendo login
 
-API = IQ_Option('potatopn@gmail.com', '!4lanP0veda*')
+API = IQ_Option('potatopn@gmail.com', 'Eita')
 API.connect()
 
 #Troca de conta

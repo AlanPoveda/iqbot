@@ -1,8 +1,8 @@
 from random import *
 from iqoptionapi.stable_api import IQ_Option
 
-username = 'potatopn@gmail.com'
-password = '!4lanP0veda*'
+username = input(str('Username: '))
+password = input(str('Padssword: '))
 valor = 2
 tempo = 1
 conta = 'PRACTICE'
