@@ -27,6 +27,7 @@ class Gale:
     def Connection(self):
         self.API.connect()
         if self.API.connect():
+            self.Account()
             return print('Successfully connected :D')
         else:
             return print('Conection Error D:')
@@ -50,11 +51,9 @@ class Gale:
             self.Compra()
         else:
             print('waiting for the result of the order...')
-            result = self.resultVerification(self.id_compra)
+            check, result = self.API.check_win_digital_v2(self.id_compra)
             if result > 0:
                 self.winResult()
-            elif result == 0:
-                self.Compra()
             else:
                 self.lossResult()
 
@@ -74,13 +73,10 @@ class Gale:
             return print("Hit :/")
         else:
             newValue = self.galeValue()
-            compra_status, self.id_compra = self.API.buy(
-                newValue, self.par, self.entrada, self.time)
-            newResult = self.resultVerification(self.id_compra)
+            compra_status, self.id_compra = self.API.buy_digital_spot(self.par, newValue, self.entrada, self.time)
+            check, newResult = self.API.check_win_digital_v2(self.id_compra)
             if newResult < 0:
                 self.lossResult()
-            elif newResult == 0:
-                self.API.buy(newValue, self.par, self.entrada, self.time)
             else:
                 newValue = self.value
                 self.winResult()

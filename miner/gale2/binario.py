@@ -2,7 +2,7 @@ from random import *
 from iqoptionapi.stable_api import IQ_Option
 
 username = 'potatopn@gmail.com'
-password = '!4lanP0veda*'
+password = 'eita'
 valor = 2
 tempo = 5
 conta = 'REAL'
@@ -90,7 +90,7 @@ class Gale:
 
     # Retorna o novo valor, fazendo o Maringale
     def galeValue(self, galeValue):
-        galeValue = (galeValue*1.05)*2
+        galeValue = (galeValue*1.15)*2
         self.gale = galeValue
         return galeValue
 
