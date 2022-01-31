@@ -2,10 +2,10 @@ from random import *
 from iqoptionapi.stable_api import IQ_Option
 
 username = input(str('Username: '))
-password = input(str('Padssword: '))
+password = input(str('Password: '))
 valor = 2
 tempo = 5
-conta = 'REAL'
+conta = 'PRACTICE'
 
 
 class Gale:
